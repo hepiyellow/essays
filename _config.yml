@@ -1,0 +1,11 @@
+title: Essays
+author: Erez Makavy
+markdown: kramdown
+exclude:
+  - README.md
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: essay
+      noindex: true

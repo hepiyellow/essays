@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  <title>{{ page.title | default: site.title }}</title>
+  {% if page.subtitle %}<meta name="description" content="{{ page.subtitle | escape }}">{% endif %}
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --text: #1f1d1a;
+      --muted: #6b665e;
+      --rule: #e4e0d8;
+      --accent: #b4532a;
+      --callout: #f3efe7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #161514;
+        --text: #e9e6e0;
+        --muted: #9c968c;
+        --rule: #2e2c29;
+        --accent: #e08a5f;
+        --callout: #201f1d;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 19px/1.65 Charter, "Bitstream Charter", "Iowan Old Style", Georgia, serif;
+    }
+    main { max-width: 680px; margin: 0 auto; padding: 64px 20px 96px; }
+    header.essay { margin-bottom: 48px; }
+    .draft {
+      display: inline-block;
+      font: 600 12px/1 system-ui, -apple-system, sans-serif;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent);
+      border-radius: 4px; padding: 5px 8px; margin-bottom: 24px;
+    }
+    h1, h2, h3 { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.2; letter-spacing: -.01em; }
+    header.essay h1 { font-size: 44px; margin: 0 0 16px; }
+    .subtitle { font-size: 22px; line-height: 1.45; color: var(--muted); margin: 0 0 24px; }
+    .byline { font: 15px/1.4 system-ui, -apple-system, sans-serif; color: var(--muted); }
+    h2 { font-size: 26px; margin: 56px 0 12px; }
+    p { margin: 0 0 20px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    strong { font-weight: 650; }
+    blockquote {
+      margin: 28px 0; padding: 14px 18px;
+      background: var(--callout); border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      font: 16px/1.5 system-ui, -apple-system, sans-serif; color: var(--muted);
+    }
+    blockquote p { margin: 0; }
+    hr { border: 0; border-top: 1px solid var(--rule); margin: 48px 0; }
+    video, img, iframe { max-width: 100%; border-radius: 8px; }
+    @media (max-width: 600px) {
+      body { font-size: 18px; }
+      main { padding: 40px 16px 72px; }
+      header.essay h1 { font-size: 34px; }
+      .subtitle { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    {% if page.title %}
+    <header class="essay">
+      {% if page.draft %}<div class="draft">Draft — not yet published</div>{% endif %}
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+      <div class="byline">{{ page.author | default: site.author }}{% if page.date %} · {{ page.date | date: "%B %-d, %Y" }}{% endif %}</div>
+    </header>
+    {% endif %}
+    <article>
+      {{ content }}
+    </article>
+  </main>
+</body>
+</html>
